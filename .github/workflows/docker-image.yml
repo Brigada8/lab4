@@ -23,4 +23,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: lab4:latest
+          tags: kontik501/lab4:latest
