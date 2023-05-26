@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+
+  # NGINX reverse-proxy
+  nginx-proxy:
+    image: lab4-5
+    container_name: nginx-proxy
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./custom-nginx.conf:/etc/nginx/conf.d/custom-nginx.conf:ro
+      - ./nginx-data/conf.d:/etc/nginx/conf.d
+      - ./nginx-data/vhost.d:/etc/nginx/vhost.d
+      - ./nginx-data/html:/usr/share/nginx/html
+      - ./nginx-data/certs:/etc/nginx/certs:ro
+      - ./nginx-data/htpasswd:/etc/nginx/htpasswd:ro
+    environment:
+      HTTPS_METHOD: "noredirect"
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json
+    command: --interval 60 --cleanup
