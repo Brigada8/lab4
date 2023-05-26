@@ -7,8 +7,7 @@ services:
     image: index.docker.io/kontik/lab4:latest
     container_name: nginx-proxy
     restart: unless-stopped
-    ports: 
-      -"80:80"
+    ports: ["80:80", "443:443"]
     expose: 
       - "80"
     volumes:
