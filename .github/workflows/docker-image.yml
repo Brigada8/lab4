@@ -17,7 +17,6 @@ jobs:
         with:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.TOKEN }}
-          logout: false
       -
         name: Build and push
         uses: docker/build-push-action@v4
