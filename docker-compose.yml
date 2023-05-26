@@ -1,31 +1,15 @@
 version: '3'
 
 services:
-
-  # NGINX reverse-proxy
-  nginx-proxy:
+  html-server:
     image: index.docker.io/kontik/lab4:latest
-    container_name: nginx-proxy
-    restart: unless-stopped
-    ports: ["80:80", "443:443"]
+    ports: 
+      - "80:80"
     expose: 
       - "80"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./custom-nginx.conf:/etc/nginx/conf.d/custom-nginx.conf:ro
-      - ./nginx-data/conf.d:/etc/nginx/conf.d
-      - ./nginx-data/vhost.d:/etc/nginx/vhost.d
-      - ./nginx-data/html:/usr/share/nginx/html
-      - ./nginx-data/certs:/etc/nginx/certs:ro
-      - ./nginx-data/htpasswd:/etc/nginx/htpasswd:ro
-    environment:
-      HTTPS_METHOD: "noredirect"
 
   watchtower:
     image: containrrr/watchtower
-    container_name: watchtower
-    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /root/.docker/config.json:/config.json
-    command: --interval 30 --cleanup
+    command: --interval 15
