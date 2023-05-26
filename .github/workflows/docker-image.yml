@@ -12,5 +12,5 @@ jobs:
       uses: docker/build-push-action@v4.0.0
       with:
         username: ${{ secrets.USERNAME }}
-        password: ${{ sercrets.PASSWORD }}
+        password: ${{ secrets.PASSWORD }}
         repository: html-server
