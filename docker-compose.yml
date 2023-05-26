@@ -7,7 +7,7 @@ services:
     image: index.docker.io/kontik/lab4:latest
     container_name: nginx-proxy
     restart: unless-stopped
-    ports: ["80:80", "443:443"]
+    ports: "80:80"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./custom-nginx.conf:/etc/nginx/conf.d/custom-nginx.conf:ro
@@ -26,4 +26,4 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /root/.docker/config.json:/config.json
-    command: --interval 10 --cleanup
+    command: --interval 30 --cleanup
